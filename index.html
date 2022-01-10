@@ -5,15 +5,153 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ashwani-Sleigh Runner | Three.js</title>
+
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+      integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+      crossorigin="anonymous"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Chonburi"
+      rel="stylesheet"
+    />
   </head>
 
   <style>
-      *{
-          margin: 0;
-          padding: 0;
-      }
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    canvas {
+      position: fixed;
+      left: 0;
+      top: 0;
+      z-index: -1;
+    }
+
+    .audio-controls {
+      z-index: 11;
+      position: absolute;
+      bottom: 25px;
+      right: 30px;
+    }
+
+    .audio-controls > i {
+      font-size: 50px;
+    }
+
+    .audio-controls:hover {
+      cursor: pointer;
+    }
+
+    .menu-container {
+      z-index: 10;
+      position: absolute;
+      top: 0px;
+      bottom: 0px;
+      left: 0px;
+      right: 0px;
+      margin: auto;
+      height: 50%;
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-around;
+      background-color: aqua;
+      background: linear-gradient(
+        to right bottom,
+        rgba(255, 255, 255, 0.7),
+        rgba(255, 255, 255, 0.3)
+      );
+
+      backdrop-filter: blur(1em);
+
+      padding: 2em;
+      border-radius: 3em;
+      font-family: "Chonburi";
+    }
+
+    .menu-container h1 {
+      font-family: "Chonburi";
+      font-size: 40px;
+    }
+
+    .menu-container h2:hover {
+      cursor: pointer;
+    }
+
+    .hide {
+      display: none;
+    }
+
+    #score-container {
+      z-index: 10;
+      position: absolute;
+      bottom: 20px;
+      left: 10px;
+      font-family: "Chonburi";
+      font-size: 30px;
+      font-weight: 700;
+    }
+
+    #level-container {
+      z-index: 10;
+      position: absolute;
+      top: 20px;
+      right: 50px;
+      color: aliceblue;
+      font-family: "Chonburi";
+      font-size: 20px;
+      font-weight: 700;
+    }
   </style>
+
   <body>
+    <main>
+      <div class="audio-controls">
+        <i class="fas fa-volume-up" id="mute"></i>
+        <i class="fas fa-volume-mute hide" id="unmute"></i>
+      </div>
+      <audio id="bgAudio">
+        <source
+          src="./assets/audios/bg-christmas-audio.mp3"
+          type="audio/mpeg"
+        />
+      </audio>
+      <audio id="crashAudio">
+        <source src="./assets/audios/crash-audio.mp3" type="audio/mpeg" />
+      </audio>
+      <audio id="jumpAudio">
+        <source src="./assets/audios/jump-audio.mp3" type="audio/mpeg" />
+      </audio>
+      <audio id="bonusAudio">
+        <source src="./assets/audios/bonus-audio.mp3" type="audio/mpeg" />
+      </audio>
+
+      <div class="menu-container">
+        <h1>Welcome to Sleigh Runner!</h1>
+        <h2>Click Here To Start</h2>
+        <h3>
+          Use Arrow keys to go Left< , Right> or Jump^ over the Trunks <br />
+          /////////////////////////Collect Rewards for Extra
+          Points\\\\\\\\\\\\\\\\\\\\\\\\\\\
+        </h3>
+      </div>
+
+      <div id="score-container">
+        <div class="score" id="max-score">Max score : <span> 0 </span></div>
+        <div class="score" id="curr-score">Curr score : <span> 0 </span></div>
+      </div>
+
+      <div id="level-container">
+        <h1>Level -</h1>
+      </div>
+    </main>
+
     <canvas></canvas>
 
     <script
@@ -22,6 +160,7 @@
       crossorigin="anonymous"
     ></script>
 
-    <script src="index.js" type = "module"></script>
+    <script src="index.js" type="module"></script>
+    <script src="audio.js" type="module" defer></script>
   </body>
 </html>
